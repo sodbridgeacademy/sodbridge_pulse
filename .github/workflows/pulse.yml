@@ -1,5 +1,8 @@
 name: Sodbridge Pulse Automation
 
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron: "0 * * * *"   # hourly run
