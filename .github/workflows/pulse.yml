@@ -1,0 +1,33 @@
+name: Sodbridge Pulse Automation
+
+on:
+  schedule:
+    - cron: "0 * * * *"   # hourly run
+  workflow_dispatch:
+
+jobs:
+  run-pulse:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run script
+        run: python sodbridge_pulse_script.py
+
+      - name: Commit updated CSV
+        run: |
+          git config user.name "sodbridge-bot"
+          git config user.email "bot@sodbridge.ai"
+          git add data/sodbridge_pulse_data.csv
+          git commit -m "update sodbridge pulse data" || echo "no changes"
+          git push
