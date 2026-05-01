@@ -29,5 +29,5 @@ jobs:
           git config user.name "sodbridge-bot"
           git config user.email "bot@sodbridge.ai"
           git add data/sodbridge_pulse_data.csv
-          git commit -m "update sodbridge pulse data" || echo "no changes"
+          git commit -m "Auto-update sodbridge pulse data" || echo "no changes"
           git push
